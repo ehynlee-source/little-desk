@@ -1,0 +1,33 @@
+rules_version = '2';
+// users/{uid}/entries/{entryId}: title (1..100), content (1..30000),
+// mood enum, date timestamp, createdAt timestamp (immutable), updatedAt timestamp.
+// Ownership is the authenticated Google UID in the path. No public profiles.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isAuthenticated() { return request.auth != null; }
+    function isOwner(uid) {
+      return isAuthenticated() && request.auth.uid == uid
+        && request.auth.token.firebase.sign_in_provider == 'google.com';
+    }
+    function isValidEntry(data) {
+      return data.keys().hasAll(['title','content','mood','date','createdAt','updatedAt'])
+        && data.keys().hasOnly(['title','content','mood','date','createdAt','updatedAt'])
+        && data.title is string && data.title.size() > 0 && data.title.size() <= 100
+        && data.content is string && data.content.size() > 0 && data.content.size() <= 30000
+        && data.mood in ['happy','calm','normal','sad','tired']
+        && data.date is timestamp && data.date >= timestamp.date(1900,1,1)
+        && data.date < timestamp.date(2200,1,1)
+        && data.createdAt is timestamp && data.updatedAt is timestamp
+        && data.updatedAt == request.time;
+    }
+    match /users/{uid}/entries/{entryId} {
+      allow read: if isOwner(uid);
+      allow create: if isOwner(uid) && isValidEntry(request.resource.data)
+        && request.resource.data.createdAt == request.time;
+      allow update: if isOwner(uid) && isValidEntry(request.resource.data)
+        && request.resource.data.createdAt == resource.data.createdAt;
+      allow delete: if isOwner(uid);
+    }
+    match /{document=**} { allow read, write: if false; }
+  }
+}
