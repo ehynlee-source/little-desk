@@ -24,6 +24,7 @@ Firebase 웹 설정의 apiKey/projectId/appId는 공개 클라이언트 설정�
 - Node.js 구문 검사: 허브·일기장·Firebase 어댑터 통과.
 - 자동 보안 테스트 4개: 실행 URL·URL 인증 정보 차단, HTML/속성 삽입 방어, 배포 파일 허용 목록·비밀키 검사, Pages 상대 경로 검사 통과.
 - Firebase Rules Playground 실제 컴파일 및 시뮬레이션: 비로그인 읽기 거부, 사용자 B의 사용자 A 문서 읽기 거부, Google 사용자 A의 본인 읽기 허용. 검증 후 콘솔에 게시.
+- 공개 Pages에서 실제 Google 로그인, 개인정보 없는 테스트 기록 저장·수정, 새로고침 후 서버에서 재조회 성공. HTML 삽입 문자열이 글자로 표시됨을 확인.
 
 ## 규칙 공격 검토
 

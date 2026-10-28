@@ -33,7 +33,7 @@ function render() {
   $('#list-title').firstChild.textContent=selectedDate?'그날의 이야기 ':'나의 모든 이야기 ';
   $('#active-filter').innerHTML=selectedDate?`<button class="filter-chip" id="clear-date">${dateLabel(selectedDate)} <span>×</span></button>`:'';
   $('#all-entries').classList.toggle('active',!selectedDate); $('#today-entries').classList.toggle('active',selectedDate===today);
-  if(list.length) $('#entries').innerHTML=list.map(e=>`<button class="entry-card" data-id="${e.id}"><div class="card-meta"><span>${dateLabel(e.date)}</span>${badge(e.mood)}</div><h3>${escape(e.title)}</h3><p>${escape(e.content)}</p><div class="card-bottom"><span>${e.content.length.toLocaleString()}자의 마음</span><span>이야기 읽기 ↗</span></div></button>`).join('');
+  if(list.length) $('#entries').innerHTML=list.map(e=>`<button class="entry-card" data-id="${escape(e.id)}"><div class="card-meta"><span>${dateLabel(e.date)}</span>${badge(e.mood)}</div><h3>${escape(e.title)}</h3><p>${escape(e.content)}</p><div class="card-bottom"><span>${e.content.length.toLocaleString()}자의 마음</span><span>이야기 읽기 ↗</span></div></button>`).join('');
   else $('#entries').innerHTML=`<div class="empty"><span class="empty-symbol">▤</span><h3>${query||filter?'찾는 이야기가 아직 없어요':selectedDate?'이날의 이야기를 남겨볼까요?':'첫 번째 조각을 남겨보세요'}</h3><p>${query||filter?'검색어나 기분 필터를 바꿔보세요.':'사소한 순간도 좋아요.<br>오늘의 나를 기억할 수 있는 작은 기록을 시작해보세요.'}</p>${query||filter?'<button class="secondary" id="reset-filters">필터 초기화</button>':'<button class="primary" id="empty-new">＋ 일기 쓰기</button>'}</div>`;
   renderCalendar();
 }

@@ -10,14 +10,14 @@
 
 ## 실행과 배포
 
-Node.js 24 이상에서 별도 npm 설치 없이 실행할 수 있습니다.
+실행.cmd를 더블클릭하거나 Node.js 24 이상에서 아래 명령으로 실행합니다. 별도 npm 설치는 필요하지 않습니다.
 
 ```powershell
 node scripts/build.mjs
 node scripts/serve.mjs
 ```
 
-http://127.0.0.1:3101 에서 열립니다. Firebase 로그인은 승인된 도메인에서 사용합니다.
+http://localhost:3101 에서 열립니다. Firebase 로그인은 승인된 도메인에서 사용합니다.
 
 GitHub Pages 게시 소스는 main 브랜치의 /docs입니다. 수정 후 node scripts/build.mjs를 실행하고 소스와 docs를 함께 커밋하세요. 빌드 스크립트는 명시한 정적 파일만 복사합니다.
 
@@ -43,3 +43,4 @@ Firebase 콘솔에서 설정한 규칙과 저장소의 규칙을 함께 관리�
 [개인정보 안내](PRIVACY.md)를 확인하세요. 기존 로컬 일기장의 SQLite 파일은 복사하거나 업로드하지 않습니다. 일기는 종단 간 암호화되지 않으며 Firebase 관리자는 접근할 수 있습니다. 허브 설정은 브라우저 localStorage, 일기는 Firebase에 저장됩니다. 외부 글꼴·Analytics·AI 분석은 사용하지 않습니다.
 
 배포 대상에는 내부 배포 설정, 기존 Git 이력, 압축파일, 로그, 데이터베이스, 사용자 기록, 환경 변수 파일을 포함하지 않습니다. 검토 범위는 [SECURITY.md](SECURITY.md)에 기록합니다.
+

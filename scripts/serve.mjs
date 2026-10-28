@@ -12,4 +12,4 @@ http.createServer(async(req,res)=>{
   res.setHeader('Cache-Control','no-store');res.setHeader('X-Content-Type-Options','nosniff');
   res.end(await readFile(new URL(name,root)));
  }catch{res.writeHead(500);res.end('Cannot load page');}
-}).listen(3101,'127.0.0.1',()=>console.log('http://127.0.0.1:3101'));
+}).listen(3101,'127.0.0.1',()=>console.log('http://localhost:3101'));
